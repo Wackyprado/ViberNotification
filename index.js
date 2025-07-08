@@ -8,14 +8,14 @@ const https = require('https');
 
 const app = express();
 app.use(bodyParser.json());
-const { VIBER_TOKEN,END_POINT,ALLOWED_ORIGIN } = process.env;
+const { VIBER_TOKEN,END_POINT,ALLOWED_ORIGIN,ALLOWED_ORIGIN_2 } = process.env;
 
 const agent = new https.Agent({
   rejectUnauthorized: false
 });
 
 app.use(cors({
-  origin: [ ALLOWED_ORIGIN ],
+  origin: [ ALLOWED_ORIGIN,ALLOWED_ORIGIN_2 ],
 }))
 
 const headers = {
