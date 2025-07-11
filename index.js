@@ -43,6 +43,8 @@ app.post("/viber/webhook", (req, res) => {
   if (body.event === "conversation_started") {
     const { id, name } = body.user;
     const context = body.context
+    console.log("context", context);
+    console.log("id", id);
 
     if(context){
         save_user(id,context)
@@ -58,6 +60,8 @@ app.post("/viber/webhook", (req, res) => {
 app.post("/sendMessage", (req,res) => {
     const body = req.body;
     const {viber_id,message,botName} = body;
+
+    console.log(body)
     sendTextMessage(viber_id,message, botName ? botName : 'Ardent Notification')
 
     res.json({ message: "Message sent" });
