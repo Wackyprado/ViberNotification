@@ -69,7 +69,7 @@ app.post("/sendMessage", (req,res) => {
 
 
 async function save_user(viberId,context){
-  const [employee_id,tenant_id] = req.query.context.split(',');
+  const [employee_id,tenant_id] = context.split(',');
     await axios.get(`${END_POINT}/save_viber?key=${SECRET}&viber_id=${viberId}&employee_id=${employee_id}&tenant_id=${tenant_id}`,{httpsAgent:agent})
 }
 
