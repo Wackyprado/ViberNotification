@@ -8,7 +8,7 @@ const https = require('https');
 
 const app = express();
 app.use(bodyParser.json());
-const { VIBER_TOKEN,END_POINT,ALLOWED_ORIGIN,ALLOWED_ORIGIN_2 } = process.env;
+const { VIBER_TOKEN,END_POINT,ALLOWED_ORIGIN,ALLOWED_ORIGIN_2,SECRET } = process.env;
 
 const agent = new https.Agent({
   rejectUnauthorized: false
@@ -68,8 +68,9 @@ app.post("/sendMessage", (req,res) => {
 })
 
 
-async function save_user(viberId,employee_id){
-    await axios.get(`${END_POINT}/save_viber?viber_id=${viberId}&employee_id=${employee_id}`,{httpsAgent:agent})
+async function save_user(viberId,context){
+  const [employee_id,tenant_id] = req.query.context.split(',');
+    await axios.get(`${END_POINT}/save_viber?key=${SECRET}&viber_id=${viberId}&employee_id=${employee_id}&tenant_id=${tenant_id}`,{httpsAgent:agent})
 }
 
 
